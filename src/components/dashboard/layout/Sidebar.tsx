@@ -40,6 +40,11 @@ const defaultNavItems: NavItem[] = [
     label: "AI Stock Scanner",
     href: "/ai-stock-scanner",
   },
+  {
+    icon: <TrendingUp size={20} />,
+    label: "Portfolio Input",
+    href: "/portfolio-input",
+  },
   { icon: <Target size={20} />, label: "Allocation Tracker" },
   { icon: <DollarSign size={20} />, label: "Cash Flow Planner" },
   { icon: <TrendingUp size={20} />, label: "Performance" },

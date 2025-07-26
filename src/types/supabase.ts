@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      portfolio_entries: {
+        Row: {
+          created_at: string | null
+          entry_date: string
+          gain_percent: number
+          id: string
+          notes: string | null
+          portfolio_value: number
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          entry_date: string
+          gain_percent: number
+          id?: string
+          notes?: string | null
+          portfolio_value: number
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          entry_date?: string
+          gain_percent?: number
+          id?: string
+          notes?: string | null
+          portfolio_value?: number
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       scanner_history: {
         Row: {
           execution_time_ms: number | null

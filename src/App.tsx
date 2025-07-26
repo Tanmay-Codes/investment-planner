@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { Navigate, Route, Routes, useRoutes } from "react-router-dom";
 import routes from "tempo-routes";
 import LoginForm from "./components/auth/LoginForm";
@@ -7,9 +6,10 @@ import Dashboard from "./components/pages/dashboard";
 import Success from "./components/pages/success";
 import Home from "./components/pages/home";
 import AIStockScanner from "./components/pages/AIStockScanner";
+import ManualPortfolioInput from "./components/pages/ManualPortfolioInput";
 import { AuthProvider, useAuth } from "../supabase/auth";
 import { Toaster } from "./components/ui/toaster";
-import { LoadingScreen, LoadingSpinner } from "./components/ui/loading-spinner";
+import { LoadingScreen } from "./components/ui/loading-spinner";
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -25,42 +25,42 @@ function PrivateRoute({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
-function AppRoutes() {
-  return (
-    <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/signup" element={<SignUpForm />} />
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-        <Route path="/success" element={<Success />} />
-        <Route
-          path="/ai-stock-scanner"
-          element={
-            <PrivateRoute>
-              <AIStockScanner />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
-      {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
-    </>
-  );
-}
-
 function App() {
   return (
     <AuthProvider>
-      <Suspense fallback={<LoadingScreen text="Loading application..." />}>
-        <AppRoutes />
-      </Suspense>
+      <div className="min-h-screen bg-gray-50">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/signup" element={<SignUpForm />} />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route path="/success" element={<Success />} />
+          <Route
+            path="/ai-stock-scanner"
+            element={
+              <PrivateRoute>
+                <AIStockScanner />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/portfolio-input"
+            element={
+              <PrivateRoute>
+                <ManualPortfolioInput />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+        {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
+      </div>
       <Toaster />
     </AuthProvider>
   );
